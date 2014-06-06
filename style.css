@@ -1,0 +1,20 @@
+body{
+	background-color: #D6B8E0;
+}
+
+header{
+	margin: 0 auto;
+	font-size: 40px;
+	text-align: center;
+	font-weight: bold;
+}
+
+canvas{
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+}
+
+#gameDiv{
+	margin: 0 auto;
+	text-align: center;
+}
