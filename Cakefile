@@ -1,6 +1,16 @@
-{exec} = require 'child_process'
+fs = require 'fs'
 
-task 'build', 'Build project from *.coffee to *.js', ->
-	exec 'coffee --compile --output lib/ src/', (err, stdout, stderr) ->    
-		throw err if err
-   		console.log stdout + stderr
+{print} = require 'sys'
+{spawn} = require 'child_process'
+
+build = (callback) ->
+  coffee = spawn 'coffee', ['-c', '-o', 'lib', 'src']
+  coffee.stderr.on 'data', (data) ->
+    process.stderr.write data.toString()
+  coffee.stdout.on 'data', (data) ->
+    print data.toString()
+  coffee.on 'exit', (code) ->
+    callback?() if code is 0
+
+task 'build', 'Build lib/ from src/', ->
+	build()
